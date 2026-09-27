@@ -1,0 +1,156 @@
+<title>Precios Voy y Vuelvo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap">
+<style>
+:root{
+  --ground:#F7F3F1; --surface:#FFFFFF; --ink:#1F1416; --muted:#6B5A5C; --line:#E6DCD9;
+  --brand:#CC0000; --wine:#8B1A1A; --onbrand:#FFFFFF;
+  --tag:#FFD84D; --tag-ink:#1F1416; --chip:#FFFFFF; --chip-on:#1F1416; --chip-on-ink:#FFFFFF;
+  --photo:#FFFFFF; --noimg:#F1E7E4; --noimg-ink:#8B1A1A; --note:#FFF4D6; --note-ink:#5A4300;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --body:"Barlow",Arial,Helvetica,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141011; --surface:#1F191A; --ink:#F4EDEB; --muted:#B5A6A7; --line:#342B2C;
+    --brand:#FF4747; --wine:#5E1414; --onbrand:#FFFFFF;
+    --tag:#F2C94C; --tag-ink:#1A1300; --chip:#1F191A; --chip-on:#F4EDEB; --chip-on-ink:#141011;
+    --photo:#FFFFFF; --noimg:#2A2122; --noimg-ink:#FF9C9C; --note:#3A3013; --note-ink:#F2DDA0;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141011; --surface:#1F191A; --ink:#F4EDEB; --muted:#B5A6A7; --line:#342B2C;
+  --brand:#FF4747; --wine:#5E1414; --onbrand:#FFFFFF;
+  --tag:#F2C94C; --tag-ink:#1A1300; --chip:#1F191A; --chip-on:#F4EDEB; --chip-on-ink:#141011;
+  --photo:#FFFFFF; --noimg:#2A2122; --noimg-ink:#FF9C9C; --note:#3A3013; --note-ink:#F2DDA0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.35}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--wine);color:var(--onbrand);box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.top-in{max-width:1100px;margin:0 auto;padding:12px 16px 10px;display:grid;gap:10px}
+.brandrow{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:.3px;margin:0;line-height:1}
+.brand span{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;background:var(--tag);color:var(--tag-ink);padding:3px 7px;border-radius:5px;vertical-align:5px;margin-left:4px}
+.count{font-size:13px;opacity:.85;white-space:nowrap}
+.search{position:relative}
+.search input{width:100%;font:500 16px var(--body);padding:11px 40px 11px 40px;border-radius:10px;border:0;background:#fff;color:#1F1416;outline:none}
+.search input:focus-visible{box-shadow:0 0 0 3px var(--tag)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#8a7a7c}
+.clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;font:600 20px var(--body);color:#8a7a7c;width:32px;height:32px;border-radius:8px;cursor:pointer}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 16px 12px;max-width:1100px;margin:0 auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid rgba(255,255,255,.35);background:transparent;color:var(--onbrand);font:600 14px var(--body);padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--tag);color:var(--tag-ink);border-color:var(--tag)}
+.chip:focus-visible{outline:2px solid var(--tag);outline-offset:2px}
+main{max-width:1100px;margin:0 auto;padding-inline:16px;padding-block:14px 32px}
+.note{background:var(--note);color:var(--note-ink);border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:14px}
+.section{margin:18px 0 8px;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.2px;display:flex;align-items:baseline;gap:8px;text-wrap:balance}
+.section small{font-family:var(--body);font-weight:500;font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.photo{aspect-ratio:1/1;background:var(--photo);display:grid;place-items:center;max-width:100%}
+.photo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.noimg{background:var(--noimg);color:var(--noimg-ink);display:grid;place-items:center;text-align:center;gap:6px}
+.noimg b{font-family:var(--display);font-size:34px;line-height:1}
+.noimg span{font-size:12px;font-weight:600;opacity:.8}
+.info{padding:9px 10px 0;flex:1}
+.name{font-weight:600;font-size:14.5px;line-height:1.25;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tag{margin:10px 0 0;background:var(--tag);color:var(--tag-ink);padding:6px 10px 7px;display:grid;gap:1px;position:relative}
+.tag:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--brand)}
+.price{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.price .u{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0;margin-left:4px}
+.pack{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.pack em{font-style:normal;font-weight:500;opacity:.8}
+.noprice{font-family:var(--display);font-weight:700;font-size:20px}
+.empty{padding:40px 8px;text-align:center;color:var(--muted)}
+footer{max-width:1100px;margin:0 auto;padding:0 16px 28px;color:var(--muted);font-size:13px}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .12s}.card:active{transform:scale(.985)}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brandrow">
+      <h1 class="brand">Voy y Vuelvo <span>Precios</span></h1>
+      <div class="count" id="count"></div>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscar: coca 3 litros, royal, pisco…" autocomplete="off" aria-label="Buscar producto">
+      <button class="clear" id="clear" type="button" aria-label="Borrar búsqueda" hidden>×</button>
+    </div>
+  </div>
+  <nav class="chips" id="chips" aria-label="Categorías"></nav>
+</header>
+
+<main>
+  __NOTE__
+  <div id="list"></div>
+</main>
+<footer id="foot">Precios de venta con IVA incluido, iguales en Voy y Vuelvo y Voy y Vuelvo 2.0. Actualizado: __FECHA__.</footer>
+
+<script type="application/json" id="catalogo">__DATA__</script>
+<script>
+(function(){
+  const DATA = JSON.parse(document.getElementById('catalogo').textContent);
+  const ORDER = ["Cervezas","Vinos y espumantes","Piscos","Whisky","Ron, vodka, gin y licores","Cócteles y listos para tomar","Bebidas","Aguas","Jugos, néctares y té","Energéticas e isotónicas","Cigarros y vapes","Snacks y frutos secos","Dulces, galletas y chocolates","Helados","Lácteos","Panadería","Abarrotes","Congelados y cecinas","Limpieza y aseo","Otros"];
+  const fmt = n => '$' + Math.round(n).toLocaleString('es-CL');
+  const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/,/g,'.');
+  const cats = ORDER.filter(c => DATA.some(p => p.c === c));
+  DATA.forEach(p => { p._s = norm(p.n + ' ' + p.c); });
+  let cat = 'Todo', q = '';
+  try { const saved = localStorage.getItem('vyv-cat'); if (saved && (saved==='Todo' || cats.includes(saved))) cat = saved; } catch(e){}
+  const chips = document.getElementById('chips'), list = document.getElementById('list');
+  const input = document.getElementById('q'), clear = document.getElementById('clear'), count = document.getElementById('count');
+
+  function renderChips(){
+    chips.innerHTML = '';
+    ['Todo', ...cats].forEach(c => {
+      const b = document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=c;
+      b.setAttribute('aria-pressed', String(c===cat));
+      b.onclick = () => { cat = c; try{localStorage.setItem('vyv-cat',c)}catch(e){}; renderChips(); render(); window.scrollTo({top:0}); };
+      chips.appendChild(b);
+    });
+  }
+  function initials(c){ return c.split(/[\s,]+/).filter(w=>w.length>2).slice(0,2).map(w=>w[0].toUpperCase()).join(''); }
+  function card(p){
+    const el = document.createElement('article'); el.className='card';
+    const ph = document.createElement('div');
+    if (p.img){ ph.className='photo'; const im=new Image(); im.src=p.img; im.alt=p.n; im.loading='lazy'; im.decoding='async';
+      im.onerror=()=>{ ph.className='photo noimg'; ph.innerHTML=''; fill(); }; ph.appendChild(im); }
+    else { ph.className='photo noimg'; fill(); }
+    function fill(){ const b=document.createElement('b'); b.textContent=initials(p.c); const s=document.createElement('span'); s.textContent='Sin foto'; ph.append(b,s); }
+    const info=document.createElement('div'); info.className='info';
+    const h=document.createElement('h3'); h.className='name'; h.textContent=p.n; info.appendChild(h);
+    const tag=document.createElement('div'); tag.className='tag';
+    if (p.p){ const pr=document.createElement('div'); pr.className='price'; pr.textContent=fmt(p.p);
+      const u=document.createElement('span'); u.className='u'; u.textContent='c/u'; pr.appendChild(u); tag.appendChild(pr);
+      if (p.k && p.kp){ const pk=document.createElement('div'); pk.className='pack';
+        pk.innerHTML = 'Pack ' + p.k + ': <strong></strong> <em></em>';
+        pk.querySelector('strong').textContent = fmt(p.kp); pk.querySelector('em').textContent = '· ' + fmt(p.kp/p.k) + ' c/u';
+        tag.appendChild(pk); }
+    } else { const np=document.createElement('div'); np.className='noprice'; np.textContent='Precio por definir'; tag.appendChild(np); }
+    el.append(ph, info, tag); return el;
+  }
+  function render(){
+    const terms = norm(q).split(/\s+/).filter(Boolean);
+    const hit = DATA.filter(p => (cat==='Todo' || p.c===cat) && terms.every(t => p._s.includes(t)));
+    list.innerHTML='';
+    count.textContent = hit.length + (hit.length===1?' producto':' productos');
+    if (!hit.length){ const e=document.createElement('p'); e.className='empty'; e.textContent='No hay productos que coincidan con «' + q + '». Prueba con otra palabra o elige «Todo».'; list.appendChild(e); return; }
+    const groups = (cat==='Todo' ? cats : [cat]).map(c => [c, hit.filter(p=>p.c===c).sort((a,b)=>a.n.localeCompare(b.n,'es'))]).filter(g=>g[1].length);
+    groups.forEach(([c,items]) => {
+      const h=document.createElement('h2'); h.className='section'; h.textContent=c;
+      const sm=document.createElement('small'); sm.textContent=items.length; h.appendChild(sm);
+      const g=document.createElement('div'); g.className='grid'; items.forEach(p=>g.appendChild(card(p)));
+      list.append(h,g);
+    });
+  }
+  input.addEventListener('input', () => { q=input.value; clear.hidden=!q; render(); });
+  clear.addEventListener('click', () => { q=''; input.value=''; clear.hidden=true; input.focus(); render(); });
+  renderChips(); render();
+})();
+</script>
