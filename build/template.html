@@ -6,7 +6,7 @@
 :root{
   --ground:#F7F3F1; --surface:#FFFFFF; --ink:#1F1416; --muted:#6B5A5C; --line:#E6DCD9;
   --brand:#CC0000; --wine:#8B1A1A; --onbrand:#FFFFFF;
-  --tag:#FFD84D; --tag-ink:#1F1416; --chip:#FFFFFF; --chip-on:#1F1416; --chip-on-ink:#FFFFFF;
+  --tag:#FFD84D; --tag-ink:#1F1416; --kicker:#FFD84D; --age:#FFD84D; --age-ink:#1F1416; --logo-bg:#FFD84D; --logo-ar:#8B1A1A; --logo-bt:#8B1A1A; --logo-ls:#CC0000; --chip:#FFFFFF; --chip-on:#1F1416; --chip-on-ink:#FFFFFF;
   --photo:#FFFFFF; --noimg:#F1E7E4; --noimg-ink:#8B1A1A; --note:#FFF4D6; --note-ink:#5A4300;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --body:"Barlow",Arial,Helvetica,sans-serif;
 }
@@ -33,15 +33,16 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:12px;margin:0;min-width:0}
 .logo{width:52px;height:52px;flex:0 0 auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.lg-bg{fill:var(--logo-bg)}.lg-ar{stroke:var(--logo-ar);stroke-width:3.6;stroke-linecap:round}.lg-ah{fill:var(--logo-ar)}.lg-bt{fill:var(--logo-bt)}.lg-lb{fill:var(--logo-bg)}.lg-ls{fill:var(--logo-ls)}
 .brand-tx{display:grid;gap:3px;min-width:0}
-.kicker{font:700 12px var(--body);letter-spacing:3px;text-transform:uppercase;color:var(--tag);line-height:1}
+.kicker{font:700 12px var(--body);letter-spacing:3px;text-transform:uppercase;color:var(--kicker);line-height:1}
 .name-big{font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:.3px;line-height:.95;white-space:nowrap}
 .count{font-size:13px;opacity:.85;white-space:nowrap;align-self:flex-end}
 .facts{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0;padding:0;list-style:none}
 .facts li{display:inline-flex;align-items:center;gap:6px;font:500 13px var(--body);padding:5px 10px 5px 8px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);white-space:nowrap}
-.facts svg{width:15px;height:15px;flex:0 0 auto;color:var(--tag)}
-.facts .age{background:var(--tag);color:var(--tag-ink);border-color:var(--tag);font-weight:600}
-.facts .age b{font:700 12px var(--body);background:var(--wine);color:#fff;border-radius:999px;padding:2px 5px;letter-spacing:0}
+.facts svg{width:15px;height:15px;flex:0 0 auto;color:var(--kicker)}
+.facts .age{background:var(--age);color:var(--age-ink);border-color:var(--age);font-weight:600}
+.facts .age b{font:700 12px var(--body);background:var(--age-ink);color:var(--age);border-radius:999px;padding:2px 5px;letter-spacing:0}
 @media (max-width:420px){.logo{width:44px;height:44px}.name-big{font-size:28px}.kicker{font-size:11px;letter-spacing:2.4px}.facts li{font-size:12px}}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--wine);color:var(--onbrand);box-shadow:0 6px 10px -4px rgba(0,0,0,.28)}
 .top-in{max-width:1100px;margin:0 auto;padding:8px 16px 10px}
@@ -85,7 +86,7 @@ footer{max-width:1100px;margin:0 auto;padding:0 16px 28px;color:var(--muted);fon
 <div class="mast">
   <div class="mast-in">
     <div class="brandrow">
-      <h1 class="brand"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Logo Botillería Voy y Vuelvo"><circle cx="32" cy="32" r="31" fill="#FFD84D"/><path d="M14.38 46.78A23 23 0 0 1 12.93 19.14" fill="none" stroke="#8B1A1A" stroke-width="3.6" stroke-linecap="round"/><path d="M8.37 16.06L16.56 13.75L17.49 22.22Z" fill="#8B1A1A"/><path d="M49.62 17.22A23 23 0 0 1 51.07 44.86" fill="none" stroke="#8B1A1A" stroke-width="3.6" stroke-linecap="round"/><path d="M55.63 47.94L47.44 50.25L46.51 41.78Z" fill="#8B1A1A"/><path d="M29.6 9.5h4.8v2.2h-.6v7.6c0 1.6.9 2.7 2.4 4 1.6 1.4 2.6 3 2.6 5.4V50c0 1.7-1.3 3-3 3h-7.6c-1.7 0-3-1.3-3-3V28.7c0-2.4 1-4 2.6-5.4 1.5-1.3 2.4-2.4 2.4-4v-7.6h-.6Z" fill="#8B1A1A"/><rect x="25.4" y="35" width="13.2" height="8" fill="#FFD84D"/><rect x="25.4" y="37.2" width="13.2" height="3.6" fill="#CC0000"/></svg><span class="brand-tx"><span class="kicker">Botillería</span><span class="name-big">Voy y Vuelvo</span></span></h1>
+      <h1 class="brand"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Logo Botillería Voy y Vuelvo"><circle class="lg-bg" cx="32" cy="32" r="31"/><path d="M14.38 46.78A23 23 0 0 1 12.93 19.14" class="lg-ar" fill="none" stroke-width="3.6" stroke-linecap="round"/><path d="M8.37 16.06L16.56 13.75L17.49 22.22Z" class="lg-ah"/><path d="M49.62 17.22A23 23 0 0 1 51.07 44.86" class="lg-ar" fill="none" stroke-width="3.6" stroke-linecap="round"/><path d="M55.63 47.94L47.44 50.25L46.51 41.78Z" class="lg-ah"/><path class="lg-bt" d="M29.6 9.5h4.8v2.2h-.6v7.6c0 1.6.9 2.7 2.4 4 1.6 1.4 2.6 3 2.6 5.4V50c0 1.7-1.3 3-3 3h-7.6c-1.7 0-3-1.3-3-3V28.7c0-2.4 1-4 2.6-5.4 1.5-1.3 2.4-2.4 2.4-4v-7.6h-.6Z"/><rect x="25.4" y="35" width="13.2" height="8" class="lg-lb"/><rect x="25.4" y="37.2" width="13.2" height="3.6" class="lg-ls"/></svg><span class="brand-tx"><span class="kicker">Botillería</span><span class="name-big">Voy y Vuelvo</span></span></h1>
       <div class="count" id="count"></div>
     </div>
     <ul class="facts" aria-label="Información de la botillería">
